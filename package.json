@@ -21,6 +21,7 @@
 		"@remotion/lambda": "3.3.39",
 		"@remotion/player": "3.3.39",
 		"@vercel/node": "^2.8.1",
+		"cheerio": "1.0.0-rc.12",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"remotion": "3.3.39"
