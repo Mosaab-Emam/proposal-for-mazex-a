@@ -1,10 +1,11 @@
 import { AbsoluteFill, Sequence } from "remotion";
-import { CovidStats } from "./sequences/CovidStats";
-import { Intro1 } from "./sequences/Intro1";
-import { Intro2 } from "./sequences/Intro2";
-import { PopularProducts } from "./sequences/PopularProducts";
-import { ProductComparison } from "./sequences/ProductComparison";
-import { WeatherThisWeek } from "./sequences/WeatherThisWeek";
+import { CovidStats } from "./sequences/covid-stats";
+import { Intro1 } from "./sequences/intro-1";
+import { Intro2 } from "./sequences/intro-2";
+import { LatestNews } from "./sequences/latest-news";
+import { PopularProducts } from "./sequences/popular-products";
+import { ProductComparison } from "./sequences/product-comparison";
+import { WeatherThisWeek } from "./sequences/wheather-this-week";
 
 export const Proposal: React.FC<{ datetime: string }> = ({ datetime }) => {
     return (
@@ -19,12 +20,15 @@ export const Proposal: React.FC<{ datetime: string }> = ({ datetime }) => {
                 <PopularProducts />
             </Sequence>
             <Sequence from={180 * 3} durationInFrames={180}>
-                <ProductComparison />
+                <LatestNews />
             </Sequence>
             <Sequence from={180 * 4} durationInFrames={180}>
-                <WeatherThisWeek />
+                <ProductComparison />
             </Sequence>
             <Sequence from={180 * 5} durationInFrames={180}>
+                <WeatherThisWeek />
+            </Sequence>
+            <Sequence from={180 * 6} durationInFrames={180}>
                 <CovidStats />
             </Sequence>
         </AbsoluteFill >
