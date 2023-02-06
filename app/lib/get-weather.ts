@@ -30,12 +30,29 @@ export const getWeather = async (): Promise<Weather> => {
   const forecastday = data.forecast.forecastday.slice(1).map(day => {
     const d = new Date(day.date);
     return {
-      date: `${day_names[d.getDay()]} | ${d.getDate()} ${month_names[d.getMonth()]}`
+      date: `${day_names[d.getDay()]} | ${d.getDate()} ${month_names[d.getMonth()]}`,
+      avgtemp_c: day.day.avgtemp_c,
+      avgtemp_f: day.day.avgtemp_f,
+      condition: {
+        icon: day.day.condition.icon
+      }
     }
   });
+
+  const d = new Date(data.current.last_updated)
   const weather: Weather = {
-    location: {},
-    current: {},
+    location: {
+      name: data.location.name,
+      country: data.location.country
+    },
+    current: {
+      date: `${day_names[d.getDay()]} | ${d.getDate()} ${month_names[d.getMonth()]} | ${d.toISOString().split(" ")[1]}`,
+      temp_c: data.current.temp_c,
+      temp_f: data.current.temp_f,
+      condition: {
+        icon: data.current.condition.icon
+      }
+    },
     forecast: {
       forecastday
     }

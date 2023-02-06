@@ -73,7 +73,10 @@ export const action: ActionFunction = async ({ request }) => {
 		datetime: "test",
 		headlines: [],
 		weather: {
-			location: {},
+			location: {
+				name: "",
+				country: ""
+			},
 			current: {},
 			forecast: {
 				forecastday: []

@@ -29,11 +29,26 @@ export type Headline = {
 }
 
 export type Weather = {
-	location: object,
-	current: object,
+	location: {
+		name: string,
+		country: string
+	},
+	current: {
+		date: string,
+		temp_c: number,
+		temp_f: number;
+		condition: {
+			icon: string
+		}
+	},
 	forecast: {
 		forecastday: Array<{
-			date: string
+			date: string,
+			avgtemp_c: number,
+			avgtemp_f: number;
+			condition: {
+				icon: string
+			}
 		}>
 	}
 }
