@@ -20,6 +20,7 @@
 		"@remotion/cli": "3.3.39",
 		"@remotion/lambda": "3.3.39",
 		"@remotion/player": "3.3.39",
+		"@types/cheerio": "^0.22.31",
 		"@vercel/node": "^2.8.1",
 		"cheerio": "1.0.0-rc.12",
 		"react": "^18.2.0",

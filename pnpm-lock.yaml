@@ -12,6 +12,7 @@ specifiers:
   '@remotion/eslint-plugin': 3.3.39
   '@remotion/lambda': 3.3.39
   '@remotion/player': 3.3.39
+  '@types/cheerio': ^0.22.31
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.10
   '@vercel/node': ^2.8.1
@@ -33,6 +34,7 @@ dependencies:
   '@remotion/cli': 3.3.39_biqbaboplfbrettd7655fr4n2y
   '@remotion/lambda': 3.3.39_biqbaboplfbrettd7655fr4n2y
   '@remotion/player': 3.3.39_biqbaboplfbrettd7655fr4n2y
+  '@types/cheerio': 0.22.31
   '@vercel/node': 2.9.0
   cheerio: 1.0.0-rc.12
   react: 18.2.0
@@ -3644,6 +3646,12 @@ packages:
       '@types/node': 18.11.19
       '@types/responselike': 1.0.0
     dev: true
+
+  /@types/cheerio/0.22.31:
+    resolution: {integrity: sha512-Kt7Cdjjdi2XWSfrZ53v4Of0wG3ZcmaegFXjMmz9tfNrZSkzzo36G0AL1YqSdcIA78Etjt6E609pt5h1xnQkPUw==}
+    dependencies:
+      '@types/node': 18.11.19
+    dev: false
 
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
