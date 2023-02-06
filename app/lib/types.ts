@@ -16,7 +16,9 @@ export type RenderResponse = {
 };
 
 export type LoaderData = {
+	datetime: string,
 	headlines: Headline[];
+	weather: Weather;
 }
 
 export type Headline = {
@@ -24,4 +26,14 @@ export type Headline = {
 	category: string,
 	title: string,
 	time: string
+}
+
+export type Weather = {
+	location: object,
+	current: object,
+	forecast: {
+		forecastday: Array<{
+			date: string
+		}>
+	}
 }

@@ -2,12 +2,13 @@ import type { ActionFunction, LinksFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { Player } from '@remotion/player';
+import { getWeather } from 'app/lib/get-weather';
 import { latestHeadlines } from 'app/lib/news-headlines-parser';
 import { Proposal } from 'app/remotion/proposal';
 import React, { useCallback, useMemo, useState } from 'react';
 import { RenderProgress } from '../components/render-progress';
 import { renderVideo } from '../lib/render-video.server';
-import type { Headline, LoaderData, RenderResponse } from '../lib/types';
+import type { LoaderData, RenderResponse } from '../lib/types';
 import type { ProposalProps } from '../remotion/constants';
 import {
 	COMPOSITION_DURATION_IN_FRAMES,
@@ -47,10 +48,13 @@ const playerStyle: React.CSSProperties = {
 	aspectRatio: 16 / 9,
 };
 
-export async function loader() {
+export async function loader(): Promise<LoaderData> {
 	const headlines = await latestHeadlines();
+	const weather = await getWeather();
 	return {
-		headlines
+		datetime: 'test',
+		headlines,
+		weather,
 	};
 }
 
@@ -67,7 +71,14 @@ export const action: ActionFunction = async ({ request }) => {
 	const inputProps: ProposalProps = {
 		personalizedName,
 		datetime: "test",
-		headlines: []
+		headlines: [],
+		weather: {
+			location: {},
+			current: {},
+			forecast: {
+				forecastday: []
+			}
+		}
 	};
 
 	const renderData = await renderVideo({
@@ -102,7 +113,7 @@ export default function Index() {
 	);
 
 	const inputProps: ProposalProps = useMemo(() => {
-		return { personalizedName, datetime: 'test', headlines: loaderData.headlines };
+		return { personalizedName, datetime: 'test', headlines: loaderData.headlines, weather: loaderData.weather };
 	}, [personalizedName]);
 
 	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
