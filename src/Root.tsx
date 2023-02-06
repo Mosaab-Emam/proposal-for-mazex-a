@@ -1,7 +1,7 @@
 import { Composition } from 'remotion';
 import { HelloWorld } from './HelloWorld';
 import { Logo } from './HelloWorld/Logo';
-import { Intro } from './Intro';
+import { Proposal } from './Proposal';
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -35,9 +35,9 @@ export const RemotionRoot: React.FC = () => {
 				height={1080}
 			/>
 			<Composition
-				id="Intro"
-				component={Intro}
-				durationInFrames={180}
+				id="Proposal"
+				component={Proposal}
+				durationInFrames={1000}
 				height={720}
 				width={1280}
 				fps={30}
