@@ -14,3 +14,14 @@ export type RenderResponse = {
 	functionName: string;
 	region: AwsRegion;
 };
+
+export type LoaderData = {
+	headlines: Headline[];
+}
+
+export type Headline = {
+	image: string,
+	category: string,
+	title: string,
+	time: string
+}

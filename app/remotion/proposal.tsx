@@ -1,3 +1,4 @@
+import { Headline } from "app/lib/types";
 import { AbsoluteFill, Sequence } from "remotion";
 import { CovidStats } from "./sequences/covid-stats";
 import { Intro1 } from "./sequences/intro-1";
@@ -7,7 +8,7 @@ import { PopularProducts } from "./sequences/popular-products";
 import { ProductComparison } from "./sequences/product-comparison";
 import { WeatherThisWeek } from "./sequences/wheather-this-week";
 
-export const Proposal: React.FC<{ datetime: string }> = ({ datetime }) => {
+export const Proposal: React.FC<{ datetime: string, headlines: Array<Headline> }> = ({ datetime, headlines }) => {
     return (
         <AbsoluteFill style={{ backgroundColor: "#333", color: "white" }}>
             <Sequence durationInFrames={180}>
@@ -20,7 +21,7 @@ export const Proposal: React.FC<{ datetime: string }> = ({ datetime }) => {
                 <PopularProducts />
             </Sequence>
             <Sequence from={180 * 3} durationInFrames={180}>
-                <LatestNews />
+                <LatestNews headlines={headlines} />
             </Sequence>
             <Sequence from={180 * 4} durationInFrames={180}>
                 <ProductComparison />

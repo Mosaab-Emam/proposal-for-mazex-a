@@ -1,12 +1,13 @@
 import type { ActionFunction, LinksFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useFetcher } from '@remix-run/react';
+import { useFetcher, useLoaderData } from '@remix-run/react';
 import { Player } from '@remotion/player';
+import { latestHeadlines } from 'app/lib/news-headlines-parser';
 import { Proposal } from 'app/remotion/proposal';
 import React, { useCallback, useMemo, useState } from 'react';
 import { RenderProgress } from '../components/render-progress';
 import { renderVideo } from '../lib/render-video.server';
-import type { RenderResponse } from '../lib/types';
+import type { Headline, LoaderData, RenderResponse } from '../lib/types';
 import type { ProposalProps } from '../remotion/constants';
 import {
 	COMPOSITION_DURATION_IN_FRAMES,
@@ -46,6 +47,13 @@ const playerStyle: React.CSSProperties = {
 	aspectRatio: 16 / 9,
 };
 
+export async function loader() {
+	const headlines = await latestHeadlines();
+	return {
+		headlines
+	};
+}
+
 export const action: ActionFunction = async ({ request }) => {
 	const formData = await request.formData();
 	const personalizedName = formData.get('personalizedName') as string;
@@ -58,6 +66,8 @@ export const action: ActionFunction = async ({ request }) => {
 
 	const inputProps: ProposalProps = {
 		personalizedName,
+		datetime: "test",
+		headlines: []
 	};
 
 	const renderData = await renderVideo({
@@ -73,6 +83,7 @@ export const action: ActionFunction = async ({ request }) => {
 export default function Index() {
 	const [personalizedName, setPersonalizedName] = useState('you');
 	const fetcher = useFetcher<RenderResponse>();
+	const loaderData = useLoaderData<LoaderData>();
 
 	const onNameChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -91,8 +102,10 @@ export default function Index() {
 	);
 
 	const inputProps: ProposalProps = useMemo(() => {
-		return { personalizedName };
+		return { personalizedName, datetime: 'test', headlines: loaderData.headlines };
 	}, [personalizedName]);
+
+	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
 
 	return (
 		<div style={container} className="container">

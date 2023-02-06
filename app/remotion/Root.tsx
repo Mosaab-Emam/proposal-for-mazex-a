@@ -1,3 +1,5 @@
+import { useLoaderData } from '@remix-run/react';
+import { Headline } from 'app/lib/types';
 import { Composition } from 'remotion';
 import {
 	COMPOSITION_DURATION_IN_FRAMES,
@@ -9,8 +11,14 @@ import {
 import { LogoAnimation } from './logo-animation';
 import { Proposal } from './proposal';
 
-export const RemotionRoot = () => {
+export async function loader() {
+	return { hello: "world1" }
+}
+
+export const RemotionRoot = async () => {
 	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
+	const headlines: Array<Headline> = [];
+
 	return (
 		<>
 			{/* <Composition
@@ -29,7 +37,8 @@ export const RemotionRoot = () => {
 				width={COMPOSITION_WIDTH}
 				height={COMPOSITION_HEIGHT}
 				defaultProps={{
-					datetime
+					datetime,
+					headlines
 				}}
 			/>
 		</>
