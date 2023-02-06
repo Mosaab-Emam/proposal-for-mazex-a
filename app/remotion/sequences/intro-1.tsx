@@ -1,8 +1,8 @@
 import { Sequence } from 'remotion'
 import { COLOR_1 } from '../components/constants'
-import { Subtext } from '../components/Subtext'
-import { Subtitle } from '../components/Subtitle'
-import { Title } from '../components/Title'
+import { Subtext } from '../components/subtext'
+import { Subtitle } from '../components/subtitle'
+import { Title } from '../components/title'
 
 export const Intro1: React.FC<{ datetime: string }> = ({ datetime }) => {
   return (
