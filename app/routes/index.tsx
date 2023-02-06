@@ -17,9 +17,10 @@ import {
 } from '../remotion/constants';
 import { LogoAnimation } from '../remotion/logo-animation';
 import stylesHref from '../styles/layout.css';
+import customStyleHref from '../styles/style.css';
 
 export const links: LinksFunction = () => {
-	return [{ rel: 'stylesheet', href: stylesHref }];
+	return [{ rel: 'stylesheet', href: stylesHref }, { rel: 'stylesheet', href: customStyleHref }];
 };
 
 const container: React.CSSProperties = {
