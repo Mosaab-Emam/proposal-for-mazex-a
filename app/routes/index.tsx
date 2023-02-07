@@ -2,6 +2,7 @@ import type { ActionFunction, LinksFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { Player } from '@remotion/player';
+import { getCovidStats } from 'app/lib/get-covid-stats';
 import { getWeather } from 'app/lib/get-weather';
 import { latestHeadlines } from 'app/lib/news-headlines-parser';
 import { Proposal } from 'app/remotion/proposal';
@@ -51,10 +52,12 @@ const playerStyle: React.CSSProperties = {
 export async function loader(): Promise<LoaderData> {
 	const headlines = await latestHeadlines();
 	const weather = await getWeather();
+	const covid = await getCovidStats();
 	return {
 		datetime: 'test',
 		headlines,
 		weather,
+		covid
 	};
 }
 
@@ -77,10 +80,23 @@ export const action: ActionFunction = async ({ request }) => {
 				name: "",
 				country: ""
 			},
-			current: {},
+			current: {
+				date: "",
+				temp_c: 0,
+				temp_f: 0,
+				condition: {
+					icon: ""
+				}
+			},
 			forecast: {
 				forecastday: []
 			}
+		},
+		covid: {
+			2023: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+			2022: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+			2021: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+			2020: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
 		}
 	};
 
@@ -99,6 +115,8 @@ export default function Index() {
 	const fetcher = useFetcher<RenderResponse>();
 	const loaderData = useLoaderData<LoaderData>();
 
+	console.log(loaderData.covid);
+
 	const onNameChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) =>
 			setPersonalizedName(e.target.value),
@@ -116,7 +134,7 @@ export default function Index() {
 	);
 
 	const inputProps: ProposalProps = useMemo(() => {
-		return { personalizedName, datetime: 'test', headlines: loaderData.headlines, weather: loaderData.weather };
+		return { personalizedName, datetime: 'test', headlines: loaderData.headlines, weather: loaderData.weather, covid: loaderData.covid };
 	}, [personalizedName]);
 
 	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });

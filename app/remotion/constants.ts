@@ -1,4 +1,4 @@
-import type { Headline, Weather } from "app/lib/types";
+import type { LoaderData } from "app/lib/types";
 
 export const COMPOSITION_FPS = 30;
 export const COMPOSITION_DURATION_IN_FRAMES = 42 * COMPOSITION_FPS;
@@ -10,9 +10,6 @@ export const DISK = 2048;
 export const TIMEOUT = 240;
 export const SITE_NAME = 'Proposal';
 
-export interface ProposalProps {
+export interface ProposalProps extends LoaderData {
 	personalizedName: string;
-	datetime: string,
-	headlines: Headline[],
-	weather: Weather
 }

@@ -40,7 +40,7 @@ export const getWeather = async (): Promise<Weather> => {
   });
 
   const d = new Date(data.current.last_updated)
-  const weather: Weather = {
+  return {
     location: {
       name: data.location.name,
       country: data.location.country
@@ -57,7 +57,4 @@ export const getWeather = async (): Promise<Weather> => {
       forecastday
     }
   };
-
-  console.log(weather.forecast.forecastday)
-  return weather;
 }

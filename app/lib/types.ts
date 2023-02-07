@@ -15,10 +15,20 @@ export type RenderResponse = {
 	region: AwsRegion;
 };
 
+export type Covid = {
+	[key: number]: {
+		confirmed: number;
+		deaths: number;
+		active: number;
+		recovered: number;
+	}
+}
+
 export type LoaderData = {
 	datetime: string,
 	headlines: Headline[];
 	weather: Weather;
+	covid: Covid;
 }
 
 export type Headline = {
