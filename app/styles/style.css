@@ -263,3 +263,21 @@
 	text-align: center;
 	color: grey;
 }
+
+#charts {
+	width: 100%;
+}
+
+#charts .charts-container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#charts .charts-container > div:first-child {
+	flex-grow: 4;
+}
+
+#charts .charts-container > div:last-child {
+	flex-grow: 1;
+}

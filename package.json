@@ -23,6 +23,7 @@
 		"@types/cheerio": "^0.22.31",
 		"@vercel/node": "^2.8.1",
 		"autoprefixer": "^10.4.13",
+		"chart.js": "^4.2.0",
 		"cheerio": "1.0.0-rc.12",
 		"postcss": "^8.4.21",
 		"postcss-loader": "^7.0.2",

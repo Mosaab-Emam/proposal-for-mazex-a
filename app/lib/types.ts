@@ -26,7 +26,7 @@ export type Covid = {
 
 export type LoaderData = {
 	datetime: string,
-	headlines: Headline[];
+	headlines: Array<Headline>;
 	weather: Weather;
 	covid: Covid;
 }

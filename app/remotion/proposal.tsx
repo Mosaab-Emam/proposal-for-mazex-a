@@ -8,7 +8,7 @@ import { PopularProducts } from "./sequences/popular-products";
 import { ProductComparison } from "./sequences/product-comparison";
 import { WeatherThisWeek } from "./sequences/weather-this-week";
 
-export const Proposal: React.FC<LoaderData> = ({ datetime, headlines, weather }) => {
+export const Proposal: React.FC<LoaderData> = ({ datetime, headlines, weather, covid }) => {
     return (
         <AbsoluteFill style={{ backgroundColor: "#333", color: "white" }}>
             <Sequence durationInFrames={180}>
@@ -30,7 +30,7 @@ export const Proposal: React.FC<LoaderData> = ({ datetime, headlines, weather })
                 <WeatherThisWeek weather={weather} />
             </Sequence>
             <Sequence from={180 * 6} durationInFrames={180}>
-                <CovidStats />
+                <CovidStats covid={covid} />
             </Sequence>
         </AbsoluteFill >
     )

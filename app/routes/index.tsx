@@ -57,7 +57,7 @@ export async function loader(): Promise<LoaderData> {
 		datetime: 'test',
 		headlines,
 		weather,
-		covid
+		covid,
 	};
 }
 
@@ -90,7 +90,7 @@ export const action: ActionFunction = async ({ request }) => {
 			},
 			forecast: {
 				forecastday: []
-			}
+			},
 		},
 		covid: {
 			2023: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
@@ -115,8 +115,6 @@ export default function Index() {
 	const fetcher = useFetcher<RenderResponse>();
 	const loaderData = useLoaderData<LoaderData>();
 
-	console.log(loaderData.covid);
-
 	const onNameChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) =>
 			setPersonalizedName(e.target.value),
@@ -134,8 +132,11 @@ export default function Index() {
 	);
 
 	const inputProps: ProposalProps = useMemo(() => {
-		return { personalizedName, datetime: 'test', headlines: loaderData.headlines, weather: loaderData.weather, covid: loaderData.covid };
-	}, [personalizedName]);
+		return {
+			personalizedName,
+			...loaderData
+		};
+	}, [personalizedName, loaderData]);
 
 	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
 
