@@ -6,7 +6,7 @@ import { Title } from '../components/title'
 
 export const Intro: React.FC<{ datetime: string }> = ({ datetime }) => {
   return (
-    <div id="intro-1">
+    <div id="intro">
       <Sequence style={{ marginTop: '20rem' }}>
         <Title titleText="هذا الفيديو مولد برمجياً" titleColor='white' />
       </Sequence>

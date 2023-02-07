@@ -4,6 +4,7 @@ import { Control } from "./sequences/control";
 import { CovidStats } from "./sequences/covid-stats";
 import { Intro } from "./sequences/intro";
 import { LatestNews } from "./sequences/latest-news";
+import { Outro } from "./sequences/outro";
 import { WeatherThisWeek } from "./sequences/weather-this-week";
 
 export const Proposal: React.FC<LoaderData> = ({ datetime, headlines, weather, covid }) => {
@@ -23,6 +24,9 @@ export const Proposal: React.FC<LoaderData> = ({ datetime, headlines, weather, c
             </Sequence>
             <Sequence from={180 * 4} durationInFrames={8 * 30}>
                 <Control />
+            </Sequence>
+            <Sequence from={32 * 30} durationInFrames={6 * 30}>
+                <Outro />
             </Sequence>
         </AbsoluteFill >
     )
