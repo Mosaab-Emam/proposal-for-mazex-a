@@ -1,5 +1,6 @@
 import type { Weather } from "app/lib/types"
 import { Img } from "remotion"
+import { Title } from "../components/title"
 
 export const WeatherThisWeek: React.FC<{ weather: Weather }> = ({ weather }) => {
   return (
@@ -20,6 +21,7 @@ export const WeatherThisWeek: React.FC<{ weather: Weather }> = ({ weather }) => 
           <h1>{weather.current.temp_f} &deg;F</h1>
         </div>
       </div>
+      <Title titleText="الطقس في مصر" titleColor="white" />
       {weather.forecast.forecastday.map(day => (
         <div className="box-container" key={day.date}>
           <div className='box' key={day.date}>
