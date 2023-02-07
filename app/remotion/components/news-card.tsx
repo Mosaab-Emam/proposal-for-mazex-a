@@ -1,5 +1,5 @@
 import { Headline } from "app/lib/types";
-import { spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Img, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
 export const NewsCard: React.FC<{ headline: Headline, index: number }> = ({ headline, index }) => {
   const frame = useCurrentFrame();
@@ -13,7 +13,7 @@ export const NewsCard: React.FC<{ headline: Headline, index: number }> = ({ head
   return (
     <article className="card shadow" style={{ transform: `scale(${scale})` }}>
       <div>
-        <img src={headline.image} alt="{headline.title}" />
+        <Img src={headline.image} alt="{headline.title}" />
       </div>
 
       <div>

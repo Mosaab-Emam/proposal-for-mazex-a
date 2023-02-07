@@ -4,7 +4,7 @@ import { Subtext } from '../components/subtext'
 import { Subtitle } from '../components/subtitle'
 import { Title } from '../components/title'
 
-export const Intro1: React.FC<{ datetime: string }> = ({ datetime }) => {
+export const Intro: React.FC<{ datetime: string }> = ({ datetime }) => {
   return (
     <div id="intro-1">
       <Sequence style={{ marginTop: '20rem' }}>
@@ -21,7 +21,7 @@ export const Intro1: React.FC<{ datetime: string }> = ({ datetime }) => {
           <Subtext text="تم إنتاجه بواسطة: " style={{ marginLeft: 20 }} />
           <Subtext slower text="Mazex A" style={{ color: COLOR_1, fontSize: 60 }} />
         </div>
-      </Sequence >
+      </Sequence>
     </div>
   )
 }
