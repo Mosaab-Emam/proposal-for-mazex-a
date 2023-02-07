@@ -71,10 +71,10 @@ export const CovidStats: React.FC<{ covid: Covid }> = ({ covid }) => {
   return (
     <div id="charts">
       <Title titleText="الكورونا في السعودية" titleColor="white" />
-      <Sequence durationInFrames={60} style={{ position: 'relative', height: '72%', justifyContent: "center" }}>
+      <Sequence durationInFrames={3 * 30} style={{ position: 'relative', height: '72%', justifyContent: "center" }}>
         <ChartComponent config={bar_chart_config} id="bar-chart" />
       </Sequence>
-      <Sequence from={60} durationInFrames={60} style={{ position: 'relative', height: '72%', justifyContent: 'center' }}>
+      <Sequence from={3 * 30} durationInFrames={3 * 30} style={{ position: 'relative', height: '72%', justifyContent: 'center' }}>
         <ChartComponent config={pie_chart_config} id="pie-chart" />
       </Sequence>
     </div>

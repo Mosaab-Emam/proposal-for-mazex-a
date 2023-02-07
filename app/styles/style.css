@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 
+#intro-1 {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 #latest-news {
 	font-family: 'Raleway', sans-serif;
 	line-height: 1.5;
