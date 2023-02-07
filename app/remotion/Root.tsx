@@ -1,5 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
-import { Headline } from 'app/lib/types';
+import type { Headline } from 'app/lib/types';
 import { Composition } from 'remotion';
 import {
 	COMPOSITION_DURATION_IN_FRAMES,
@@ -10,10 +10,6 @@ import {
 } from './constants';
 import { LogoAnimation } from './logo-animation';
 import { Proposal } from './proposal';
-
-export async function loader() {
-	return { hello: "world1" }
-}
 
 export const RemotionRoot = async () => {
 	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
