@@ -14,6 +14,7 @@ export const renderVideo = async ({
 	inputProps: unknown;
 	outName: string;
 }): Promise<RenderResponse> => {
+	console.log("At least I am here");
 	const region = process.env.REMOTION_AWS_REGION as AwsRegion | undefined;
 	if (!region) {
 		throw new Error('REMOTION_AWS_REGION is not set');

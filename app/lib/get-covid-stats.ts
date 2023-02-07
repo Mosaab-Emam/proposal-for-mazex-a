@@ -1,6 +1,25 @@
-import data from "../test-data/covid.json";
+type CovidData = {
+  Confirmed: number;
+  Deaths: number;
+  Active: number;
+  Recovered: number;
+  Date: string;
+}
 
-export const getCovidStats = () => {
+export const getCovidStats = async (country: string = 'saudi-arabia') => {
+  let data: Array<CovidData>;
+  try {
+    const response = await fetch("https://api.covid19api.com/country/" + country);
+    data = await response.json() as unknown as Array<CovidData>;
+  } catch (error) {
+    console.log("Error fetching covid data", error); 
+    return {
+      2023: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+      2022: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+      2021: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+      2020: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
+    };
+  }
   return data.reduce((result, item) => {
     if (item.Date.startsWith("2023")) {
       result[2023].confirmed += item.Confirmed;

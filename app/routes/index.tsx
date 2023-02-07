@@ -49,6 +49,24 @@ const playerStyle: React.CSSProperties = {
 	aspectRatio: 16 / 9,
 };
 
+const covid_options = [
+	"saudi-arabia",
+	"egypt",
+	"sudan",
+	"united-arab-emirates",
+	"bahrain",
+	"qatar"
+];
+
+const countryNames = {
+	"saudi-arabia": "السعودية",
+	"egypt": "مصر",
+	"sudan": "السودان",
+	"united-arab-emirates": "الامارات",
+	"bahrain": "البحرين",
+	"qatar": "قطر"
+}
+
 export async function loader(): Promise<LoaderData> {
 	const headlines = await latestHeadlines();
 	const weather = await getWeather();
@@ -64,12 +82,15 @@ export async function loader(): Promise<LoaderData> {
 export const action: ActionFunction = async ({ request }) => {
 	const formData = await request.formData();
 	const personalizedName = formData.get('personalizedName') as string;
+	const covidCountry = formData.get('covidCountry') as string;
 
 	if (!personalizedName) {
 		throw new Response(JSON.stringify({ error: 'No name entered' }), {
 			status: 400,
 		});
 	}
+
+	const covid = await getCovidStats(covidCountry);
 
 	const inputProps: ProposalProps = {
 		personalizedName,
@@ -92,12 +113,7 @@ export const action: ActionFunction = async ({ request }) => {
 				forecastday: []
 			},
 		},
-		covid: {
-			2023: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
-			2022: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
-			2021: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
-			2020: { confirmed: 0, deaths: 0, active: 0, recovered: 0 },
-		}
+		covid
 	};
 
 	const renderData = await renderVideo({
@@ -112,12 +128,20 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Index() {
 	const [personalizedName, setPersonalizedName] = useState('you');
+	const [covidCountry, setCovidCountry] = useState('saudi-arabia');
 	const fetcher = useFetcher<RenderResponse>();
+	const renderer = useFetcher();
 	const loaderData = useLoaderData<LoaderData>();
 
 	const onNameChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) =>
 			setPersonalizedName(e.target.value),
+		[]
+	);
+
+	const onCovidCountryChange = useCallback(
+		(e: React.ChangeEvent<HTMLSelectElement>) =>
+			setCovidCountry(e.target.value),
 		[]
 	);
 
@@ -130,6 +154,17 @@ export default function Index() {
 		},
 		[fetcher, personalizedName]
 	);
+
+	const render = useCallback(
+		(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			e.preventDefault();
+			const data = new FormData();
+			data.append('personalizedName', personalizedName);
+			data.append('covidCountry', covidCountry);
+			renderer.submit(data, { method: 'post' });
+		},
+		[renderer, personalizedName, covidCountry]
+	)
 
 	const inputProps: ProposalProps = useMemo(() => {
 		return {
@@ -155,7 +190,7 @@ export default function Index() {
 				/>
 			</div>
 			<div style={content}>
-				<h1>Welcome to the Remotion Remix template!</h1>
+				<h1>مرحباً Mazex A، قم بالتجربة</h1>
 				<div>
 					{fetcher.data ? (
 						<RenderProgress
@@ -165,8 +200,7 @@ export default function Index() {
 					) : fetcher.state === 'submitting' ? (
 						<div>Invoking</div>
 					) : (
-						<div>
-							<p>Enter your name for a custom video:</p>
+						<div style={{ direction: 'rtl' }}>
 							<fetcher.Form method="post">
 								<input
 									type="text"
@@ -174,14 +208,24 @@ export default function Index() {
 									value={personalizedName}
 								/>
 								<br></br>
+								<label htmlFor="#covidCountry">جلب إحصائيات كورونا لـ:</label> &nbsp;
+								<select id="covidCountry" onChange={onCovidCountryChange}>
+									{
+										covid_options.map((op) => <option value={op} key={op}>{op}</option>)
+									}
+								</select>
+								<br></br>
 								<button type="submit" onClick={onClick}>
 									Render a video
+								</button>
+								<button type="submit" onClick={render}>
+									X
 								</button>
 							</fetcher.Form>
 						</div>
 					)}
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
