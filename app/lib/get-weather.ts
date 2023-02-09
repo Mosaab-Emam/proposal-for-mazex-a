@@ -1,5 +1,5 @@
-import data from "../test-data/weather.json";
-import type { Weather } from "./types";
+// import data from "../test-data/weather.json";
+import type { Weather, WeatherResponse } from "./types";
 
 const day_names = [
   'الأحد',
@@ -26,7 +26,10 @@ const month_names = [
   "ديسمبر"
 ];
 
-export const getWeather = async (): Promise<Weather> => {
+export const getWeather = async (city: string = 'cairo'): Promise<Weather> => {
+  console.log(process.env)
+  const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}=${city}&days=7&aqi=no&alerts=no`);
+  const data = await response.json() as unknown as WeatherResponse;
   const forecastday = data.forecast.forecastday.slice(1).map(day => {
     const d = new Date(day.date);
     return {
@@ -46,7 +49,7 @@ export const getWeather = async (): Promise<Weather> => {
       country: data.location.country
     },
     current: {
-      date: `${day_names[d.getDay()]} | ${d.getDate()} ${month_names[d.getMonth()]} | ${d.toISOString().split(" ")[1]}`,
+      date: `${day_names[d.getDay()]} | ${d.getDate()} ${month_names[d.getMonth()]} | ${d.toISOString().split("T")[1].slice(0, 5)}`,
       temp_c: data.current.temp_c,
       temp_f: data.current.temp_f,
       condition: {

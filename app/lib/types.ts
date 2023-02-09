@@ -1,5 +1,32 @@
 import type { AwsRegion, EnhancedErrorInfo } from '@remotion/lambda';
 
+export type WeatherResponse = {
+	location: {
+		name: string;
+		country: string;
+	}
+	current: {
+		last_updated: string;
+		temp_c: number;
+		temp_f: number;
+		condition: {
+			icon: string;
+		}
+	},
+	forecast: {
+		forecastday: Array<{
+			date: string;
+			day: {
+				avgtemp_c: number;
+				avgtemp_f: number;
+				condition: {
+					icon: string;
+				}
+			}
+		}>
+	}
+}
+
 export type StatusResponse = {
 	renderId: string;
 	done: boolean;
