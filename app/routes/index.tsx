@@ -68,11 +68,13 @@ const countryNames = {
 }
 
 export async function loader(): Promise<LoaderData> {
+	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
 	const headlines = await latestHeadlines();
 	const weather = await getWeather();
 	const covid = await getCovidStats();
+
 	return {
-		datetime: 'test',
+		datetime,
 		headlines,
 		weather,
 		covid,
@@ -127,7 +129,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-	const [personalizedName, setPersonalizedName] = useState('you');
+	const [personalizedName, setPersonalizedName] = useState('Mazex A');
 	const [covidCountry, setCovidCountry] = useState('saudi-arabia');
 	const fetcher = useFetcher<RenderResponse>();
 	const renderer = useFetcher();
@@ -173,7 +175,6 @@ export default function Index() {
 		};
 	}, [personalizedName, loaderData]);
 
-	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
 
 	return (
 		<div style={container} className="container">
@@ -190,7 +191,7 @@ export default function Index() {
 				/>
 			</div>
 			<div style={content}>
-				<h1>مرحباً Mazex A، قم بالتجربة</h1>
+				<h1 style={{ direction: 'rtl' }}>مرحباً Mazex A، قم بإنتاج الفيديو الخاص بك</h1>
 				<div>
 					{fetcher.data ? (
 						<RenderProgress

@@ -4,7 +4,7 @@ import { Subtext } from '../components/subtext'
 import { Subtitle } from '../components/subtitle'
 import { Title } from '../components/title'
 
-export const Intro: React.FC<{ datetime: string }> = ({ datetime }) => {
+export const Intro: React.FC<{ personalizedName: string, datetime: string }> = ({ personalizedName, datetime }) => {
   return (
     <div id="intro">
       <Sequence style={{ marginTop: '20rem' }}>
@@ -19,7 +19,7 @@ export const Intro: React.FC<{ datetime: string }> = ({ datetime }) => {
       <Sequence from={80} style={{ marginTop: '10rem' }}>
         <div style={{ display: "flex", flexDirection: "row-reverse", width: "100%", justifyContent: "center", alignItems: "center" }}>
           <Subtext text="تم إنتاجه بواسطة: " style={{ marginLeft: 20 }} />
-          <Subtext slower text="Mazex A" style={{ color: COLOR_1, fontSize: 60 }} />
+          <Subtext slower text={personalizedName} style={{ color: COLOR_1, fontSize: 60 }} />
         </div>
       </Sequence>
     </div>

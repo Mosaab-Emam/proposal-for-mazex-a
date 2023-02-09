@@ -11,10 +11,11 @@ export const Control: React.FC = () => {
     "إبداعك الخاص",
     "أنت المتحكم"
   ];
+
   return (
     <div id="control">
       {titles.map((title, i) =>
-        <Sequence from={i * 30} style={{ top: i * 10 + 'rem' }}>
+        <Sequence from={i * 30} key={i} style={{ top: i * 10 + 'rem' }}>
           <Title titleText={title} titleColor={i == titles.length - 1 ? COLOR_1 : 'white'} />
         </Sequence>
       )}
