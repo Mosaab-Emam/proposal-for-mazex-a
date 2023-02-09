@@ -106,8 +106,6 @@ export const action: ActionFunction = async ({ request }) => {
 	};
 
 	const renderData = await renderVideo({
-		serveUrl: SITE_NAME,
-		composition: COMPOSITION_ID,
 		inputProps,
 		outName: `out/proposal.mp4`,
 	});
