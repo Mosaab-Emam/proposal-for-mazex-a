@@ -1,4 +1,4 @@
-import { Headline } from "app/lib/types";
+import type { Headline } from "app/lib/types";
 import { Img, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
 export const NewsCard: React.FC<{ headline: Headline, index: number }> = ({ headline, index }) => {
@@ -13,13 +13,12 @@ export const NewsCard: React.FC<{ headline: Headline, index: number }> = ({ head
   return (
     <article className="card shadow" style={{ transform: `scale(${scale})` }}>
       <div>
-        <Img src={headline.image} alt="{headline.title}" />
+        <Img src={headline.image} alt={headline.title} />
       </div>
 
       <div>
         <p><strong>{headline.title}</strong></p>
         <span>
-          <i className="fab fa-instagram"></i>
           {headline.category} <time>{headline.time}</time>
         </span>
       </div>

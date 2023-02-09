@@ -25,6 +25,8 @@ export async function latestHeadlines() {
 
       const time = row.find('span.time').text().trim();
 
+      if (!image) image = "https://arabi21.com/App_Images/295x166.png";
+
       items.push({
         image,
         category,

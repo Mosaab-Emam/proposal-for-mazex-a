@@ -92,29 +92,16 @@ export const action: ActionFunction = async ({ request }) => {
 		});
 	}
 
-	const covid = await getCovidStats(covidCountry);
+	const datetime = new Date().toLocaleString("ar-EG", { timeZone: "Africa/Cairo" });
+	const headlines = await latestHeadlines();
+	const weather = await getWeather();
+	const covid = await getCovidStats();
 
 	const inputProps: ProposalProps = {
 		personalizedName,
-		datetime: "test",
-		headlines: [],
-		weather: {
-			location: {
-				name: "",
-				country: ""
-			},
-			current: {
-				date: "",
-				temp_c: 0,
-				temp_f: 0,
-				condition: {
-					icon: ""
-				}
-			},
-			forecast: {
-				forecastday: []
-			},
-		},
+		datetime,
+		headlines,
+		weather,
 		covid
 	};
 
@@ -122,7 +109,7 @@ export const action: ActionFunction = async ({ request }) => {
 		serveUrl: SITE_NAME,
 		composition: COMPOSITION_ID,
 		inputProps,
-		outName: `logo-animation.mp4`,
+		outName: `out/proposal.mp4`,
 	});
 
 	return json(renderData);
